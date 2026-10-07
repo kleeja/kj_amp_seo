@@ -1,300 +1,269 @@
 <!doctype html>
-<html amp lang="{lang.LANG_SMALL_NAME}" dir="{dir}">
+<html amp lang="{lang.LANG_SMALL_NAME}" dir="{lang.DIR}">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
-
-    <!-- components -->
-    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
-    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
-
-
-    <script async custom-element="amp-sticky-ad" src="https://cdn.ampproject.org/v0/amp-sticky-ad-1.0.js"></script>
-    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-
-
-    <title>{title}</title>
+    <meta charset="utf-8">
+    <title>{title} - {config.sitename}</title>
     <link rel="canonical" href="{amp_canonical}">
-    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <meta name="viewport" content="width=device-width">
 
-    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
-    <noscript>
-    <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
-    </noscript>
+    <!-- the AMP runtime and its components, from the AMP cache, they are always the latest version -->
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+    <IF NAME="amp_share">
+    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+    </IF>
+    <IF NAME="amp_has_ads">
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    </IF>
+    <IF NAME="amp_ad_sticky">
+    <script async custom-element="amp-sticky-ad" src="https://cdn.ampproject.org/v0/amp-sticky-ad-1.0.js"></script>
+    </IF>
 
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
+    <!-- AMP pages can't load the CSS of the style, so the page has its own -->
     <style amp-custom>
-        .header {
+        body {
+            margin: 0;
+            background: #fff;
+            color: #212529;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.5;
+        }
+
+        a {
+            color: #b60845;
+        }
+
+        .kj-header {
             position: relative;
-            box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
-            padding-top: 52px;
-        }
-        .header {
-            background-color: #607D8B;
-        }
-        .header #sample-menu {
-            position:absolute;
-            top:0;
-            <IF NAME="lang.DIR==ltr">left<ELSE>right</IF>:0;
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-            text-transform: uppercase;
-            padding: 13px;
-        }
-        .header #sample-logo {
-            position:absolute;
-            top:0;
-            <IF NAME="lang.DIR==ltr">left<ELSE>right</IF>:36px;
-            font-size: 18px;
-            font-weight: 400;
-            color: white;
-            text-transform: uppercase;
-            margin: 0 16px;
-            height: 32px;
-            text-decoration: none;
-            line-height: 52px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-height: 52px;
+            padding: 0 0.5rem;
+            background: #607d8b;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
         }
 
-        .header #sample-logo {
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0s 0.7s, opacity 0.7s ease;
-        }
-        .header  #sample-logo {
-            visibility: visible;
-            opacity: 1;
-            transition: opacity 1.5s ease;
+        .kj-menu-button {
+            display: inline-flex;
+            padding: 0.5rem;
+            border: 0;
+            background: transparent;
+            cursor: pointer;
         }
 
-        .m1{margin:1rem}
-
-        .svg-icon path,
-        .svg-icon polygon,
-        .svg-icon rect {
+        .kj-menu-button svg path {
             fill: #fff;
         }
 
-        .svg-icon circle {
-            stroke: #fff;
-            stroke-width: 1;
-        }
-
-
-
-
-        amp-sidebar{margin-top:3.5rem}
-
-        .block{display:block}
-        .p1{padding:1rem}
-        .text-decoration-none{text-decoration:none}
-
-        .ampstart-btn {
-            font-family: inherit;
-            font-weight: inherit;
-            font-size: 1rem;
-            line-height: 1.125rem;
-            padding: .7em .8em;
-            text-decoration: none;
-            white-space: nowrap;
-            word-wrap: normal;
-            vertical-align: middle;
-            cursor: pointer;
-            background-color: #fff;
-            color: #b60845;
-            border: 1px solid #b60845
-        }
-
-        .ampstart-btn:visited {
-            color: #b60845
-        }
-
-        .ampstart-btn-secondary {
-            background-color: #b60845;
+        .kj-site-name {
+            overflow: hidden;
             color: #fff;
-            border: 1px solid #fff
+            font-size: 18px;
+            text-decoration: none;
+            text-overflow: ellipsis;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
-        .ampstart-btn-secondary:visited {
-            color: #fff
+        amp-sidebar {
+            min-width: 240px;
+            padding-top: 3.5rem;
+            background: #fff;
         }
 
-        .ampstart-btn:active .ampstart-btn:focus {
-            opacity: .8
+        amp-sidebar a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #212529;
+            text-decoration: none;
         }
 
-        .ampstart-btn[disabled], .ampstart-btn[disabled]:active, .ampstart-btn[disabled]:focus, .ampstart-btn[disabled]:hover {
-            opacity: .5;
-            outline: 0;
-            cursor: default
+        amp-sidebar a:hover,
+        amp-sidebar a:focus {
+            background: #f1f3f5;
         }
 
-        .file-info-list{
-            margin: 14px;
+        /* the ads are full width, so they are outside of the sections, which have the padding */
+        .kj-main {
+            padding-bottom: 1.5rem;
         }
 
-        .file-info-list p{
+        .kj-section {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        h1 {
+            margin: 1rem 0;
+            font-size: 1.5rem;
+            overflow-wrap: anywhere;
+        }
+
+        .kj-share {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .kj-ad {
+            margin: 1rem 0;
+        }
+
+        .kj-details {
+            margin: 1rem 0;
+        }
+
+        .kj-details div {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0.75rem;
             background: #f9f7f7;
-            padding: 6px;
-            box-shadow: 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 1px -1px rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 1px -1px rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
         }
 
-        .file-info-list p .title{
+        .kj-details dt {
+            display: inline;
             color: #414446;
         }
 
-        .clearfix{
-            clear: both;
+        .kj-details dt::after {
+            content: ": ";
         }
 
-        .download{
+        .kj-details dd {
+            display: inline;
+            margin: 0;
+            overflow-wrap: anywhere;
+        }
 
-            margin:10px auto;
+        .kj-report {
+            font-size: 0.875rem;
+        }
+
+        .kj-download {
+            margin: 1.5rem 0;
             text-align: center;
         }
 
-        .download .size{
+        .kj-download-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7em 1em;
+            border: 1px solid #b60845;
+            background: #fff;
+            color: #b60845;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        .kj-download-button:hover,
+        .kj-download-button:focus {
+            background: #b60845;
+            color: #fff;
+        }
+
+        .kj-download-button svg path {
+            fill: currentColor;
+        }
+
+        .kj-size {
             display: block;
-            margin:15px;
+            margin: 1rem;
             color: #4b5257;
+            font-size: 0.875rem;
         }
-
-        .svg-down{
-          margin-bottom: -5px;
-        }
-        .svg-down path,
-        .svg-down polygon,
-        .svg-down rect {
-            fill: #b60845;
-        }
-
-        .svg-down circle {
-            stroke: #b60845;
-            stroke-width: 1;
-        }
-
-
-
-
-
     </style>
-
 </head>
 <body>
 
-<!-- sidebar -->
-<amp-sidebar id="drawermenu"
-             layout="nodisplay">
-
-    <LOOP NAME="top_menu">
-        <IF LOOP="show">
-            <a href="{{url}}" class="text-decoration-none block p1">{{title}}</a>
-        </IF>
-    </LOOP>
-
-
-    <LOOP NAME="side_menu">
-        <IF LOOP="show">
-           <a href="{{url}}" class="text-decoration-none block p1">{{title}}</a>
-        </IF>
-    </LOOP>
-
+<!-- the pages of the site -->
+<amp-sidebar id="kj-amp-menu" layout="nodisplay" side="<IF NAME="lang.DIR==rtl">right<ELSE>left</IF>">
+    <nav>
+        <LOOP NAME="amp_menu">
+        <a href="{{url}}">{{title}}</a>
+        </LOOP>
+    </nav>
 </amp-sidebar>
 
-
-<!-- header -->
-<div class="header">
-    <a id="sample-menu"
-       on="tap:drawermenu.toggle">
-
-        <svg class="svg-icon" viewBox="0 0 20 20" width="24" height="24">
+<header class="kj-header">
+    <button type="button" class="kj-menu-button" on="tap:kj-amp-menu.toggle" aria-label="{lang.MENU}">
+        <svg viewBox="0 0 20 20" width="24" height="24" aria-hidden="true">
             <path d="M10,1.445c-4.726,0-8.555,3.829-8.555,8.555c0,4.725,3.829,8.555,8.555,8.555c4.725,0,8.555-3.83,8.555-8.555C18.555,5.274,14.725,1.445,10,1.445 M10,17.654c-4.221,0-7.654-3.434-7.654-7.654c0-4.221,3.433-7.654,7.654-7.654c4.222,0,7.654,3.433,7.654,7.654C17.654,14.221,14.222,17.654,10,17.654 M14.39,10c0,0.248-0.203,0.45-0.45,0.45H6.06c-0.248,0-0.45-0.203-0.45-0.45s0.203-0.45,0.45-0.45h7.879C14.187,9.55,14.39,9.752,14.39,10 M14.39,12.702c0,0.247-0.203,0.449-0.45,0.449H6.06c-0.248,0-0.45-0.202-0.45-0.449c0-0.248,0.203-0.451,0.45-0.451h7.879C14.187,12.251,14.39,12.454,14.39,12.702 M14.39,7.298c0,0.248-0.203,0.45-0.45,0.45H6.06c-0.248,0-0.45-0.203-0.45-0.45s0.203-0.45,0.45-0.45h7.879C14.187,6.848,14.39,7.051,14.39,7.298"></path>
         </svg>
+    </button>
+    <a class="kj-site-name" href="{config.siteurl}">{config.sitename}</a>
+</header>
 
-    </a>
+<main class="kj-main">
+    <div class="kj-section">
+        <h1>{name}</h1>
 
-    <a id="sample-logo" href="{config.siteurl}">{config.sitename}</a>
+        <!-- they share the regular download page, its address is the canonical one -->
+        <IF NAME="amp_share">
+        <div class="kj-share">
+            <amp-social-share type="twitter" width="30" height="22"></amp-social-share>
+            <!-- the share dialog of the facebook type needs an app ID, the sharer of Facebook doesn't -->
+            <amp-social-share type="facebook" width="30" height="22" data-share-endpoint="https://www.facebook.com/sharer/sharer.php" data-param-u="{amp_canonical}"></amp-social-share>
+            <amp-social-share type="whatsapp" width="30" height="22"></amp-social-share>
+            <amp-social-share type="pinterest" width="30" height="22"></amp-social-share>
+            <amp-social-share type="email" width="30" height="22"></amp-social-share>
+        </div>
+        </IF>
+    </div>
 
-
-</div>
-
-<!-- title -->
-<h1 class="m1">{title}</h1>
-
-<!-- share buttons -->
-<div class="m1">
-    <amp-social-share type="twitter" width="30" height="22"></amp-social-share>
-    <amp-social-share type="facebook" width="30" height="22"></amp-social-share>
-
-    <amp-social-share type="whatsapp" width="30" height="22"></amp-social-share>
-
-    <amp-social-share type="gplus" width="30" height="22"></amp-social-share>
-    <amp-social-share type="email" width="30" height="22"></amp-social-share>
-    <amp-social-share type="pinterest" width="33" height="22"></amp-social-share>
-</div>
-
-
-<!--extra-->
-
-<div class="clearfix"></div>
-
-<IF NAME="top_ad">
-<amp-ad width=300 height=250
-        type="adsense"
-        layout="responsive"
-        data-ad-client="{adsense_client}"
-        data-ad-slot="{top_ad}">
-</amp-ad>
-</IF>
-
-<div class="clearfix"></div>
-
-<!-- info list -->
-
-<div class="file-info-list">
-    <p><span class="title">{lang.FILENAME}: </span> {name}</p>
-    <p><span class="title">{lang.FILETYPE}: </span> {type}</p>
-    <p><span class="title">{lang.FILESIZE}: </span> {size}</p>
-    <p><span class="title">{lang.FILEDATE}: </span> {time}</p>
-    <p><span class="title">{lang.FILEUPS}: </span> {uploads}</p>
-    <IF NAME="fusername">
-    <p><span class="title">{lang.USERNAME}: </span> <a href="{userfolder}">{fusername}</a></p>
+    <IF NAME="amp_ad_top">
+    <div class="kj-ad">
+        <amp-ad width="100vw" height="320" type="adsense" data-ad-client="{amp_ad_client}" data-ad-slot="{amp_ad_top}" data-auto-format="rspv" data-full-width>
+            <div overflow></div>
+        </amp-ad>
+    </div>
     </IF>
-    <p class="report">
-        <small><a href="{REPORT}" rel="nofollow"> {lang.FILEREPORT}</a></small>
-    </p>
-</div>
 
-<div class="clearfix"></div>
+    <div class="kj-section">
+        <dl class="kj-details">
+            <div><dt>{lang.FILENAME}</dt><dd>{name}</dd></div>
+            <div><dt>{lang.FILETYPE}</dt><dd>{type}</dd></div>
+            <div><dt>{lang.FILESIZE}</dt><dd><bdi>{size}</bdi></dd></div>
+            <div><dt>{lang.FILEDATE}</dt><dd>{time}</dd></div>
+            <div><dt>{lang.FILEUPS}</dt><dd>{uploads}</dd></div>
+            <IF NAME="fusername">
+            <div><dt>{lang.USERNAME}</dt><dd><a href="{userfolder}">{fusername}</a></dd></div>
+            </IF>
+        </dl>
 
-<IF NAME="middle_ad">
-    <amp-ad width=300 height=250
-            type="adsense"
-            layout="responsive"
-            data-ad-client="{adsense_client}"
-            data-ad-slot="{middle_ad}">
-    </amp-ad>
-</IF>
+        <p class="kj-report"><a href="{REPORT}" rel="nofollow">{lang.FILEREPORT}</a></p>
+    </div>
 
-<div class="clearfix"></div>
+    <IF NAME="amp_ad_middle">
+    <div class="kj-ad">
+        <amp-ad width="100vw" height="320" type="adsense" data-ad-client="{amp_ad_client}" data-ad-slot="{amp_ad_middle}" data-auto-format="rspv" data-full-width>
+            <div overflow></div>
+        </amp-ad>
+    </div>
+    </IF>
 
-<p class="download">
-    <a href="{url_file}" target="_blank" class="ampstart-btn">
-        <svg class="svg-down" viewBox="0 0 20 20" height="24" width="24">
-            <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
-        </svg>
+    <div class="kj-section">
+        <p class="kj-download">
+            <a href="{url_file}" target="_blank" class="kj-download-button">
+                <svg viewBox="0 0 20 20" width="24" height="24" aria-hidden="true">
+                    <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>
+                </svg>
+                <span>{lang.CLICK_DOWN}</span>
+            </a>
+            <small class="kj-size"><bdi>{size}</bdi></small>
+        </p>
+    </div>
+</main>
 
-        {lang.CLICK_DOWN}</a>
-
-    <small class="size">{size}</small>
-</p>
-
-<IF NAME="sticky_ad">
+<!-- a sticky ad is 100px tall at most, a taller ad is cut -->
+<IF NAME="amp_ad_sticky">
 <amp-sticky-ad layout="nodisplay">
-    <amp-ad width=300 height=250
-            type="adsense"
-            data-ad-client="{adsense_client}"
-            data-ad-slot="{sticky_ad}">
-    </amp-ad>
+    <amp-ad width="320" height="50" type="adsense" data-ad-client="{amp_ad_client}" data-ad-slot="{amp_ad_sticky}"></amp-ad>
 </amp-sticky-ad>
 </IF>
 
